@@ -1,0 +1,12 @@
+spec_version: 2-preview
+description: kishkush balabush shechaval al hazman!
+
+grains:
+  kishkush-balabush:
+    kind: terraform
+    spec:
+      source:
+        path: /kishkush
+      host:
+        cloud-account: aws
+        compute-service: kubernetes-testing
