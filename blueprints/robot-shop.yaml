@@ -38,8 +38,8 @@ grains:
       source:        
         path: github.com/QualiSystemsLab/terraform-modules.git//rds
       host:
-        cloud-account: AWS-Sales
-        compute-service: eks-demo-sales
+        cloud-account: aws
+        compute-service: kubernetes-testing
       inputs:
         - sandbox_id: '{{ sandboxid | downcase }}'
         - size: '{{ .inputs.db_size }}' 
@@ -60,8 +60,8 @@ grains:
       source:
         path: github.com/QualiSystemsLab/terraform-modules.git//s3
       host:
-        cloud-account: AWS-Sales
-        compute-service: eks-demo-sales
+        cloud-account: aws
+        compute-service: kubernetes-testing
       inputs:
         - region: eu-west-1
         - acl: private
@@ -76,8 +76,8 @@ grains:
       source:
         path: https://github.com/QualiSystemsLab/Torque-Project-Pivot.git//robotShop
       host:
-        cloud-account: AWS-Sales
-        compute-service: eks-demo-sales
+        cloud-account: aws
+        compute-service: kubernetes-testing
       # commands:
       #   - "dep up xxx"
 
