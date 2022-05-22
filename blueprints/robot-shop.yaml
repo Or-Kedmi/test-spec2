@@ -35,8 +35,9 @@ grains:
   mySqlDB:
     kind: terraform
     spec:
-      source:        
-        path: github.com/QualiSystemsLab/terraform-modules.git//rds
+      source:
+        store: Terraform-Assets
+        path: rds
       host:
         cloud-account: aws
         compute-service: kubernetes-testing
@@ -50,7 +51,7 @@ grains:
         - username: adminuser
         - vpc_id: vpc-02e3bca90b081cd0f
         - region: eu-west-1
-      outputs:
+      ouputs:
         - hostname
         - connection_string
 
@@ -58,7 +59,8 @@ grains:
     kind: terraform
     spec: 
       source:
-        path: github.com/QualiSystemsLab/terraform-modules.git//s3
+        store: Terraform-Assets
+        path: s3
       host:
         cloud-account: aws
         compute-service: kubernetes-testing
@@ -66,15 +68,14 @@ grains:
         - region: eu-west-1
         - acl: private
         - name: 'robotshop-s3-{{ sandboxid | downcase }}'
-      outputs:
-        - s3_bucket_arn
 
   robotShopMicroservices:
     kind: helm
     depends-on: mySqlDB, s3Bucket
     spec:
       source:
-        path: https://github.com/QualiSystemsLab/Torque-Project-Pivot.git//robotShop
+        store: Project-Pivot-Assets
+        path: robotShop
       host:
         cloud-account: aws
         compute-service: kubernetes-testing
