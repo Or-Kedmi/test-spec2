@@ -1,0 +1,19 @@
+spec_version: 2-preview
+description: Robotshop's S3
+
+grains:
+
+  s3Bucket:
+    kind: terraform
+    spec: 
+      source:
+        path: github.com/QualiSystemsLab/terraform-modules.git//s3
+      host:
+        cloud-account: aws
+        compute-service: kubernetes-testing
+      inputs:
+        - region: eu-west-1
+        - acl: private
+        - name: 'robotshop-s3-{{ sandboxid }}'
+      outputs:
+        - s3_bucket_arn
