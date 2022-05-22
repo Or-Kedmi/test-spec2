@@ -3,6 +3,16 @@ description: Robotshot microservices application deployed on K8S with Helm and R
 
 
 inputs:
+  account:
+    type: string
+    display-style: normal
+    default: "AWS-QualiDev2"
+    description: "cloud account"
+  compute:
+    type: string
+    display-style: normal
+    default: "qualidev2-eks"
+    description: "compute service"    
   version:
     type: string
     display-style: normal
@@ -36,11 +46,10 @@ grains:
     kind: terraform
     spec:
       source:
-        store: Terraform-Assets
-        path: rds
+        path: github.com/johnathanvidu/prod-tests.git//terraform/rds
       host:
-        cloud-account: aws
-        compute-service: kubernetes-testing
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       inputs:
         - sandbox_id: '{{ sandboxid | downcase }}'
         - size: '{{ .inputs.db_size }}' 
@@ -50,8 +59,8 @@ grains:
         - engine: MySQL
         - username: adminuser
         - vpc_id: vpc-02e3bca90b081cd0f
-        - region: eu-west-1
-      ouputs:
+        - region: us-east-1
+      outputs:
         - hostname
         - connection_string
 
@@ -59,14 +68,13 @@ grains:
     kind: terraform
     spec: 
       source:
-        store: Terraform-Assets
-        path: s3
+        path: github.com/johnathanvidu/prod-tests.git//terraform/s3
       host:
-        cloud-account: aws
-        compute-service: kubernetes-testing
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       inputs:
         - region: eu-west-1
-        - acl: private
+        - acl: public-read
         - name: 'robotshop-s3-{{ sandboxid | downcase }}'
 
   robotShopMicroservices:
@@ -74,11 +82,10 @@ grains:
     depends-on: mySqlDB, s3Bucket
     spec:
       source:
-        store: Project-Pivot-Assets
-        path: robotShop
+        path: https://github.com/QualiSystemsLab/Torque-Project-Pivot.git//robotShop
       host:
-        cloud-account: aws
-        compute-service: kubernetes-testing
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       # commands:
       #   - "dep up xxx"
 
