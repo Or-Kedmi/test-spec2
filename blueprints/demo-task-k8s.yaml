@@ -49,9 +49,15 @@ grains:
           commands: 
             - "apt-get -y install wget"
             - "wget {{ .inputs.filePath }}"
+            - name: install-wget
+              command: "apt-get -y install wget"
+            - name: download-inputs-file  
+              command: "wget {{ .inputs.filePath }}"
             - name: execute_algo
               command: python3 {{ .inputs.fileName }}
 
         destroy:
           commands:
             - "echo {{ .inputs.mySecondVal }}"
+            - name: echo-second-val
+            command: "echo {{ .inputs.mySecondVal }}"
