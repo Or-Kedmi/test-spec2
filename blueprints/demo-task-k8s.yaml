@@ -58,6 +58,5 @@ grains:
 
         destroy:
           commands:
-            - "echo {{ .inputs.mySecondVal }}"
             - name: echo-second-val
-            command: "echo {{ .inputs.mySecondVal }}"
+              command: "echo {{ .inputs.mySecondVal }}"
