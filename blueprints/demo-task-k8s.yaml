@@ -42,7 +42,7 @@ grains:
     kind: shell
     spec:
       host:
-        name: kubernetes-testing1
+        name: kubernetes-testing
         # image: http://
       activities:
         deploy:
