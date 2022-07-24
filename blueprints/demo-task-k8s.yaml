@@ -46,9 +46,7 @@ grains:
         # image: http://
       activities:
         deploy:
-          commands: 
-            - "apt-get -y install wget"
-            - "wget {{ .inputs.filePath }}"
+          commands:
             - name: install-wget
               command: "apt-get -y install wget"
             - name: download-inputs-file  
