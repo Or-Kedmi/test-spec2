@@ -47,14 +47,11 @@ grains:
       activities:
         deploy:
           commands:
-            - name: install-wget
-              command: "apt-get -y install wget"
-            - name: download-inputs-file  
-              command: "wget {{ .inputs.filePath }}"
+            - "apt-get -y install wget"
+            - "wget {{ .inputs.filePath }}"
             - name: execute_algo
               command: python3 {{ .inputs.fileName }}
 
         destroy:
           commands:
-            - name: echo-second-val
-              command: "echo {{ .inputs.mySecondVal }}"
+            - "echo {{ .inputs.mySecondVal }}"
