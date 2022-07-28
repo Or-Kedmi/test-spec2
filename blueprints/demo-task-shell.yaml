@@ -34,10 +34,8 @@ grains:
     kind: shell
     spec:
       env-vars:
-       -name: VAR_NAME1
-        value: "value1"
-      - name: VAR_NAME2
-        value: "{{ .inputs.mySecondVal }}"
+        VAR_NAME1="value1"
+        VAR_NAME2="{{ .inputs.mySecondVal }}"
       host:
         name: kubernetes-testing
         # image: http://
