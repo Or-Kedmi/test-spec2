@@ -1,0 +1,16 @@
+spec_version: 2-preview
+description: S3 with public-read acl
+
+grains:
+  s3Bucket:
+    kind: terraform
+    spec: 
+      source:
+        path: github.com/QualiSystemsLab/terraform-modules.git//s3
+      host:
+        cloud-account: aws
+        compute-service: kubernetes-testing
+      inputs:
+        - region: eu-west-1
+        - acl: public-read
+        - name: 'public-read-s3-{{ sandboxid | downcase }}'
