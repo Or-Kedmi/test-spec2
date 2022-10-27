@@ -40,4 +40,4 @@ grains:
       outputs:
       - endpoint
     # The terraform version that will be used to deploy the module
-    tf-version: 1.2.6
+    # tf-version: 1.2.6
